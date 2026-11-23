@@ -103,11 +103,11 @@ fun ClockOfClocksFace(now: LocalDateTime, scale: Float) {
                     val glyph = PIXEL_FONT[ch] ?: PIXEL_FONT['0']!!
                     if (ch == ':') {
                         // Colon: one narrow column, lit on rows 1 and 5.
-                        MiniDial(on = row == 1 || row == 5, size = cell)
+                        MiniDial(on = row == 1 || row == 5, dialSize = cell)
                         Spacer(modifier = Modifier.width((4 * scale).dp))
                     } else {
                         for (col in 0 until 5) {
-                            MiniDial(on = glyph[row][col] == '1', size = cell)
+                            MiniDial(on = glyph[row][col] == '1', dialSize = cell)
                         }
                         Spacer(modifier = Modifier.width((8 * scale).dp))
                     }
@@ -124,8 +124,8 @@ fun ClockOfClocksFace(now: LocalDateTime, scale: Float) {
 }
 
 @Composable
-private fun MiniDial(on: Boolean, size: androidx.compose.ui.unit.Dp) {
-    Canvas(modifier = Modifier.size(size).padding(2.dp)) {
+private fun MiniDial(on: Boolean, dialSize: androidx.compose.ui.unit.Dp) {
+    Canvas(modifier = Modifier.size(dialSize).padding(2.dp)) {
         val cx = size.width / 2f
         val cy = size.height / 2f
         val radius = size.minDimension / 2f - 2f

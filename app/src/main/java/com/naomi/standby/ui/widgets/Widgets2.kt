@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -665,10 +666,10 @@ fun CommandCenterWidget(now: LocalDateTime, scale: Float) {
         )
         Spacer(modifier = Modifier.height((10 * scale).dp))
         Row(horizontalArrangement = Arrangement.spacedBy((10 * scale).dp)) {
-            CommandTile("Agenda", if (events.isEmpty()) "Clear day" else events.first().title, focus == "Agenda", scale) { focus = "Agenda" }
-            CommandTile("Audio", track?.title ?: "Audio on standby", focus == "Audio", scale) { focus = "Audio" }
-            CommandTile("Battery", "${battery.levelPercent}%${if (battery.charging) " · Charging" else ""}", focus == "Battery", scale) { focus = "Battery" }
-            CommandTile("Weather", weather?.let { "%.0f° · ${it.condition}".format(it.temperatureC) } ?: "Loading…", focus == "Weather", scale) { focus = "Weather" }
+            CommandTile("Agenda", if (events.isEmpty()) "Clear day" else events.first().title, focus == "Agenda", scale, Modifier.weight(1f)) { focus = "Agenda" }
+            CommandTile("Audio", track?.title ?: "Audio on standby", focus == "Audio", scale, Modifier.weight(1f)) { focus = "Audio" }
+            CommandTile("Battery", "${battery.levelPercent}%${if (battery.charging) " · Charging" else ""}", focus == "Battery", scale, Modifier.weight(1f)) { focus = "Battery" }
+            CommandTile("Weather", weather?.let { "%.0f° · ${it.condition}".format(it.temperatureC) } ?: "Loading…", focus == "Weather", scale, Modifier.weight(1f)) { focus = "Weather" }
         }
         Spacer(modifier = Modifier.height((10 * scale).dp))
         Text(
@@ -686,13 +687,13 @@ fun CommandCenterWidget(now: LocalDateTime, scale: Float) {
 }
 
 @Composable
-private fun CommandTile(title: String, value: String, selected: Boolean, scale: Float, onClick: () -> Unit) {
+private fun CommandTile(title: String, value: String, selected: Boolean, scale: Float, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Column(
-        modifier = Modifier.clip(RoundedCornerShape(10.dp))
+        modifier = modifier.fillMaxWidth()
+            .clip(RoundedCornerShape(10.dp))
             .background(if (selected) Color(0xFF2E7D32) else Color(0xFF1A1A1A))
             .clickable { onClick() }
             .padding((10 * scale).dp)
-            .weight(1f)
     ) {
         Text(text = title, color = Color.White.copy(alpha = 0.6f), fontSize = (15 * scale).sp)
         Text(text = value, color = Color.White, fontSize = (17 * scale).sp, fontWeight = FontWeight.Bold)
