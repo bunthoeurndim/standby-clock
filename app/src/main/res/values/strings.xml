@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StandBy Clock</string>
+    <string name="dream_label">StandBy Clock</string>
+    <string name="music_listener_label">StandBy Clock music listener</string>
+    <string name="onboarding_title">StandBy Clock</string>
+    <string name="pomodoro_channel">Pomodoro timer</string>
+    <string name="pomodoro_channel_desc">Shows the Pomodoro countdown while it runs.</string>
+</resources>
