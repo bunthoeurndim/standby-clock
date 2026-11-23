@@ -103,13 +103,15 @@ val PIXEL_FONT: Map<Char, List<String>> = mapOf(
     ':' to listOf("00000", "00100", "00000", "00000", "00000", "00100", "00000")
 )
 
-/** Three world-clock zones, including Naomi's home zone. */
+/** Five world-clock zones, including Naomi's home zone. */
 data class WorldZone(val label: String, val zoneId: String)
 
 val WORLD_ZONES: List<WorldZone> = listOf(
     WorldZone("Phnom Penh", "Asia/Phnom_Penh"),
     WorldZone("London", "Europe/London"),
-    WorldZone("New York", "America/New_York")
+    WorldZone("New York", "America/New_York"),
+    WorldZone("Tokyo", "Asia/Tokyo"),
+    WorldZone("Sydney", "Australia/Sydney")
 )
 
 fun timeInZone(zoneId: String, now: LocalDateTime): String {

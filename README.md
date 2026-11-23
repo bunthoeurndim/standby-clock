@@ -1,33 +1,88 @@
-# StandBy Clock
+# StandBy
 
 An original Android app that turns your phone into a bedside / desk clock
-while it charges — in the spirit of the iOS StandBy screen.
+while it charges — a faithful replica of **StandBy Mode: Clock & Widgets**
+(Zetabit Tecnologia), rebuilt from scratch from a behavioural spec
+(`workspace/rea-standby/replica-spec.md`) extracted from the original APK
+with REA/apktool.
 
-**Original implementation.** Inspired by the public feature description of
-standby-clock apps; no code, strings, art or assets were copied from any
-other app. No ads, no Firebase, no billing, no tracking.
+**Original implementation.** No code, strings, art, fonts or assets were
+copied from the original app — the spec's screen names, labels and hex
+colours were used as the design reference only, and every renderer, widget
+and screen was written fresh. No ads, no Firebase, no billing, no tracking.
+**Everything is free in this build — there is no Premium and no paywall.**
 
-## Features
+## v2 — what the replica has
 
-- **144 clock faces** — 12 designs × 6 colours × 2 sizes, with a live-preview picker:
-  Big Digital, Flip, Analog, Segmented LCD, Neon, Word Clock, Roman Numerals,
-  Matrix, Pixel Art, Solar, World Clock (Phnom Penh / London / New York),
-  Day Clock (full date + time of day in large text).
-- **Standby screen** — large clock + date + battery % + charging ETA.
-  Swipe left/right to change face, tap for settings, long-press for faces.
-- **Duo layout** — clock on one side, a widget on the other. Swipe the widget
-  side to cycle: Calendar agenda, Battery dashboard, Next alarm, Weather
-  (Open-Meteo, free, no key), Music (track + play/pause/next), Photo frame
-  (your own photos, slideshow), Timer/Stopwatch, Pomodoro (25/5, background
-  foreground service + beep).
-- **Night mode** — red tint + dim, manual / scheduled (22:00–07:00 default) /
-  light-sensor option, AMOLED pure-black background, pixel-shift burn-in
-  protection, sleep timer (15/30/60 min).
+- **All 97 screens** from the original's catalogue, in picker order
+  (`model/Screens.kt`): every Duo clock, fullscreen variant, battery,
+  weather, player, calendar, utility and fun screen, with the original's
+  categories, explanations and search keywords.
+- **Duo home model** — two side-by-side widget slots in landscape.
+  Tap a slot to open its fullscreen counterpart (the original's
+  counterpart map), long-press to replace it, empty slots say
+  "Customize this space". Default partners follow the original
+  (Calendar by default; Weather Hero → Dementia Clock; Matrix/Pixel Art →
+  Player Duo; Player/Notification → System Dashboard; Striking Calendar →
+  Analog Clock). Lock with "Swipe down with 3 fingers to unlock" plus an
+  on-screen Unlock button; double-tap to close (when enabled).
+- **Widget picker** — "Add a widget", search by name/category/keywords,
+  category tabs, result count, per-screen explanations.
+- **Faces, restyled to the spec** — Retroflip with all **33 styles**
+  (incl. the spec's gradient stops), Big Crop Clock with all **38 themes**
+  (per-digit pastel palettes, like the Play Store screenshots), Solar
+  Watch with all **12 styles**, Segmented Clock with all **12 LED fonts**
+  (7-segment Canvas, ghost digits, blinking separator), AMOLED, Neon
+  (glow), Matrix rain, Pixel Art, Word Clock (11×10 glowing letter grid),
+  Roman numerals, Analog family (Classic / Clean / Clean No Markers /
+  Square / Square Mini / With Digital), Radial Invert, Dementia, Ants
+  (marching-dot digits), Clock Of Clocks (grid of mini analog dials),
+  World Clock (5 cities with offsets), Sereno, Clock Hero (sun arc),
+  Vibes (mood from the playing track).
+- **Widgets** — Charging screen (themes, milestone, ETA, speed label),
+  Weather (Open-Meteo, free, no key — labelled "Powered by Open-Meteo";
+  H/L, feels-like, humidity, wind, sunrise/sunset, hourly strip),
+  Player Duo/Fullscreen/Blur/Hero + Meme Player (NotificationListener,
+  transport only), Calendar month + Schedule agenda + Next Event +
+  Striking Calendar, Quotes (own quote library, swipe + hourly
+  auto-rotate), Timer (countdown + "Time's up!"), Stopwatch (laps),
+  Pomodoro (25/5, foreground service + beep), Calculator (+ scientific),
+  Tally, Todo, Sober Counter (discreet mode, relapse flow), Protocols
+  (manifesto/rotate), Countdown, Command Center, Starship Console
+  (LCARS-style), Concepts (all 34 tabs), Game Simon, Quick App Launch,
+  Notification Mini (recent notifications, on-device only), System
+  Dashboard, Day Centric Dashboard, Widget Rotator, Alarms (local,
+  with snooze and a lock-screen ring screen), Photo Slide/Mini/Stack
+  (your photos, centre-crop, private).
+- **Settings** — the original's sections in order: General (face styles,
+  photos, text size, start of week), Night Mode (manual / scheduled /
+  light sensor, burn-in protection, day/night brightness), Auto Close
+  (unplug / double-tap / portrait), App Launch (Quick Launch + device
+  tips for Samsung/Huawei/Vivo/Xiaomi), Labs (Focus Mode, full-screen
+  notifications, Export/Import settings backup), News, Support, About.
+- **Onboarding** — the original's copy: "This is StandBy Mode Pro —
+  An app that turns your Phone into a Smart Display when Charging",
+  with the original's permission titles and descriptions.
+- **Night mode** — red tint overlay + dim, manual / scheduled
+  (22:00–07:00 default) / light-sensor option, AMOLED pure-black
+  background, pixel-shift burn-in protection, sleep timer (15/30/60 min).
 - **Auto-start on charging** — opens on plug-in, closes on unplug (both
   toggleable), re-arms after boot. Also works as the Android screensaver
-  (Daydream): Settings → Display → Screen saver → StandBy Clock.
-- **Settings** — face, text size, night schedule, day/night brightness,
-  auto-start toggles, sleep timer, about.
+  (Daydream): Settings → Display → Screen saver → StandBy.
+
+## Cut from the original (not in this build)
+
+- Third-party widget host (AppWidgetHost slots 1–6 show a placeholder)
+- Lyrics tab in the player
+- Weather radar
+- GIFs in the Meme Player (captions only)
+- Spaces profiles
+- Focus-mode notification filtering (toggle present, filtering not wired)
+- Seasonal effects
+- Pomodoro History & Insights / achievements
+- Custom YouTube-video alarm themes (local alarms ring via the
+  lock-screen ring screen with a beep; no custom themes)
+- Google sign-in / ideas board voting / account
 
 ## Build
 

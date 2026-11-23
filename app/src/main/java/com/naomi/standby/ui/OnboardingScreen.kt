@@ -7,7 +7,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,9 +27,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 /**
- * First-run explanation: what the app does, which permissions it wants
- * and why. Nothing is forced — every permission can be granted later
- * from system settings, and the app still works without it.
+ * First-run intro, following the original's onboarding copy:
+ * "This is StandBy Mode Pro — An app that turns your Phone into a
+ * Smart Display when Charging." Permissions are listed with the
+ * original's titles and descriptions; every permission is optional
+ * and can be granted later from system settings.
+ *
+ * There is no Premium in this build — everything is free.
  */
 @Composable
 fun OnboardingScreen(onDone: () -> Unit) {
@@ -42,34 +45,42 @@ fun OnboardingScreen(onDone: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp)
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.Top
+            .verticalScroll(rememberScrollState())
     ) {
-        Text(text = "StandBy Clock", color = Color.White, fontSize = 36.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = "This is StandBy Mode Pro", color = Color.White, fontSize = 32.sp, fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Turn your phone into a bedside clock while it charges. " +
-                "A big clock and a widget — calendar, battery, weather, music, photos, timers — " +
-                "in landscape, large enough to read across the room.",
+            text = "An app that turns your Phone into a Smart Display when Charging.",
             color = Color.White.copy(alpha = 0.85f),
-            fontSize = 18.sp
+            fontSize = 19.sp
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(text = "How it works", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
         Text(
-            text = "• Plug in the charger and StandBy Clock opens by itself (you can turn this off).\n" +
-                "• Swipe left or right to change the clock face — there are 144 to choose from.\n" +
-                "• Tap the screen for settings. Long-press for the face picker.\n" +
+            text = "• Duo is the home screen: pick a widget for the left and the right side.\n" +
+                "• Tap a widget to open it full screen. Long-press a widget to replace it.\n" +
+                "• Plug in the charger and StandBy opens by itself (you can turn this off).\n" +
+                "• Swipe down with 3 fingers to unlock when the screen is locked.\n" +
                 "• At night the screen turns red and dims so it will not light up the room.\n" +
                 "• It also works as the Android screensaver (Daydream) when docked.",
             color = Color.White.copy(alpha = 0.85f),
             fontSize = 17.sp
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Permissions", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Some Widgets require your permission to work", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
         Text(
-            text = "Calendar (agenda widget), location (weather), photos (photo frame) and " +
-                "notifications (music track + Pomodoro) are all optional. The clock works without any of them.",
+            text = "• Calendar Access — View your upcoming events on your lock screen\n" +
+                "• Display Over Other Apps — Launch StandBy automatically when you start charging\n" +
+                "• Notification Access — Control your music without leaving the app\n" +
+                "• Notifications — Keep StandBy running in the background\n" +
+                "• Storage/photos — Allow access to your device storage to browse and select photos from your folders.\n" +
+                "• Alarms — Allow exact alarms so this alarm rings on time, even in Doze.",
+            color = Color.White.copy(alpha = 0.85f),
+            fontSize = 17.sp
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Want to start with a Premium Experience? Everything is free in this build — there is no Premium, no paywall, no ads.",
             color = Color.White.copy(alpha = 0.85f),
             fontSize = 17.sp
         )
@@ -87,7 +98,7 @@ fun OnboardingScreen(onDone: () -> Unit) {
             permissionLauncher.launch(permissions.toTypedArray())
             onDone()
         }) {
-            Text("Allow & start", color = Color.White, fontSize = 18.sp)
+            Text("Let's get started", color = Color.White, fontSize = 18.sp)
         }
         Spacer(modifier = Modifier.height(12.dp))
         Button(onClick = { onDone() }) {
@@ -95,7 +106,7 @@ fun OnboardingScreen(onDone: () -> Unit) {
         }
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Inspired by the iOS StandBy screen. Original implementation — no code, art or assets copied from any other app.",
+            text = "A faithful replica of StandBy Mode, rebuilt from scratch. Original implementation — no code, art or assets copied from any other app.",
             color = Color.White.copy(alpha = 0.5f),
             fontSize = 14.sp
         )

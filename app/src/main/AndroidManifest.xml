@@ -51,6 +51,37 @@
             android:exported="false"
             android:screenOrientation="sensorLandscape" />
 
+        <!-- Full-screen alarm ringing, over the lock screen. -->
+        <activity
+            android:name=".ui.AlarmRingActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:screenOrientation="fullSensor"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true" />
+
+        <!-- Re-schedules local alarms after boot. -->
+        <receiver
+            android:name=".service.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Settings backup export shares a file from the cache dir. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <!-- Android Daydream / screensaver: the standby screen when docked or idle. -->
         <service
             android:name=".service.StandbyDream"
